@@ -1,9 +1,9 @@
 .nav-bar {
-    background-color: green;
+    background-color: yellow;
     display: flex;
     justify-content: space-around;
-}
-                                                                                                                           
+}    
+
 .nav-bar a {
     text-decoration: none;
     color: black;
@@ -13,7 +13,3 @@
 .nav-bar a:hover{
     background-color: rgb(116, 116, 116);
 }
-
-.active {
-    background-color: darkgray;
-}    
