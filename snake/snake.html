@@ -17,34 +17,82 @@
             display:flex
         }
     </style>
+
 </head>
 <body id="body">
 </body>
 <script>
-    const body = document.getElementById("body");
-    const length = 25;
-    const width = 20;
 
-    for(let y = 0; y < length; y++){
+    const body = document.getElementById("body");
+    const width = 25;
+    const height = 20;
+    const speed = 100;
+
+    let xPos = Math.trunc(length / 2)
+    let yPos = Math.trunc(length / 2)
+    let direction = "right"
+
+    setInterval(draw, speed)
+
+    document.addEventListener("keydown", (e) => {
+        
+        switch(e.key){
+            case 'w':
+            direction = "up";
+            break;
+            case 'd':
+            direction = "right";
+            break;
+            case 's':
+            direction = "down";
+            break;
+            case 'a':
+            direction = "left";
+            break;
+            
+        }
+    })
+    function draw(){
+        console.log("this")
+        changePosition()
+        removeAllChildNodes(body)
+        for(let y = 0; y < height; y++){
         const row = document.createElement("div")
         for(let x = 0; x < width; x++){
             const cell = document.createElement("div");
             cell.id = `${x}-${y}`
+
+            if(xPos === x && yPos === y){
+                cell.style.backgroundColor = "red"
+            }
             row.append(cell)
         }
         body.append(row)
-    }   
+    }  
+ }
 
-    document.addEventListener("keydown", (e) => {
-        console.log(e.key)
-        switch(e.key){
-            case 'w':
-            console.log("up"):
+ function changePosition(){
+     switch(direction){
+         case "up":
+              yPos--;
         break;
-        case 'd'
-        
-    })
+        case "right":
+              xPos++
+        break;
+        case "down":
+              yPos++
+        break;
+        case "left":
+        xPos--
+        break;
+     }
+ }
 
+     function removeAllChildNodes(parent) {
+     while (parent.firstChild){
+        parent.removeChild(parent.firstChild);
+     }
+ }
 
 </script>
 </html>
