@@ -32,7 +32,11 @@
     let yPos = Math.trunc(length / 2)
     let direction = "right"
 
-    setInterval(draw, speed)
+    let snakeintitialLenghth = 5;
+    let score = 0;
+    let snakebody = [{x: xPos, y: yPos}]
+
+    const interval = setInterval(draw, speed)
 
     document.addEventListener("keydown", (e) => {
         
@@ -53,7 +57,6 @@
         }
     })
     function draw(){
-        console.log("this")
         changePosition()
         removeAllChildNodes(body)
         for(let y = 0; y < height; y++){
@@ -69,6 +72,28 @@
         }
         body.append(row)
     }  
+
+    if(xPos < -1 || yPos < -1 || yPos > height ){
+        console.log("death")
+        clearInterval(interval)
+    }
+
+    snakebody.push({x: xPos, y: yPos})
+
+    const snake = []
+
+    for(let i = snakebody.length - 1; i > snakebody.length - (snakeintitialLenghth + score) && i > 0; i--){
+        snake.push(snakebody[i])
+    }
+
+    snake.forEach(part => {
+        console.log(part)
+        // document.getElementById
+        document.getElementById(`${part.x}-${part.y}`).style.backgroundColor = "orange"
+    })
+
+
+    
  }
 
  function changePosition(){
