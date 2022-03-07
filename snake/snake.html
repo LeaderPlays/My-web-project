@@ -16,14 +16,28 @@
         #body > div{
             display:flex
         }
+
+        #body > div {
+            display: flex;
+        }
+
+        .start-button{
+            position: absolute;
+            left: 800px;
+            z-index: 10;
+        }
     </style>
 
 </head>
-<body id="body">
+<body >
+    <button id="start-button">START</button>
+    <div id="body"></div>
 </body>
 <script>
-
     const body = document.getElementById("body");
+    const startButton = document.getElementById("start-button")
+    let started = false
+
     const width = 25;
     const height = 20;
     const speed = 100;
@@ -36,7 +50,17 @@
     let score = 0;
     let snakebody = [{x: xPos, y: yPos}]
 
-    const interval = setInterval(draw, speed)
+    let interval;
+
+    draw();
+    startButton.addEventListener("click", ()=>{
+        if (! started){
+        interval = setInterval(draw, speed)
+        started = true
+       } 
+    })
+
+    
 
     document.addEventListener("keydown", (e) => {
         
