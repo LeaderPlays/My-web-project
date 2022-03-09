@@ -42,9 +42,10 @@
     const height = 20;
     const speed = 100;
 
-    let xPos = Math.trunc(length / 2)
-    let yPos = Math.trunc(length / 2)
+    let xPos = Math.trunc(width / 2)
+    let yPos = Math.trunc(height / 2)
     let direction = "right"
+    let appleCoords = generateAppleCoords()
 
     let snakeintitialLenghth = 5;
     let score = 0;
@@ -58,6 +59,7 @@
         interval = setInterval(draw, speed)
         started = true
        } 
+       spawnApple ()
     })
 
     
@@ -66,17 +68,28 @@
         
         switch(e.key){
             case 'w':
-            direction = "up";
+            if(direction !== "down"){
+                direction ="up"
+            }
             break;
             case 'd':
-            direction = "right";
+                if(direction!== "left"){
+                    direction = "right"
+                }
             break;
-            case 's':
-            direction = "down";
+            case "s":
+            if(direction !== "up"){
+                direction ="down"
+            }
             break;
             case 'a':
-            direction = "left";
-            break;
+            if(direction!== "right"){
+                    direction = "left"
+                }
+            break
+
+                
+            
             
         }
     })
@@ -116,7 +129,7 @@
         document.getElementById(`${part.x}-${part.y}`).style.backgroundColor = "orange"
     })
 
-
+    spawnApple(appleCoords.x, appleCoords.y)
     
  }
 
@@ -135,14 +148,26 @@
         xPos--
         break;
      }
- }
-
-     function removeAllChildNodes(parent) {
-     while (parent.firstChild){
+    }
+    function removeAllChildNodes(parent) {
+        while (parent.firstChild){
         parent.removeChild(parent.firstChild);
-     }
- }
+        }
+   
+    }
 
+    function generateAppleCoords (){
+        const xValue = Math.round(Math.random() * width)
+        const yValue = Math.round(Math.random() * height)
+        return {x: xValue, y: yValue}
+    }
+
+    function spawnApple (xValue, yValue) {
+        console.log(xValue, yValue)
+        const cell = document.getElementById(`$(xValue)-$(yValue)`)
+        cell.style.backgroundColor = "red"
+    }
+    
 </script>
 </html>
 
